@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -10,8 +10,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { MessageContext } from "@/contexts/MessageContext";
 
 function Form() {
+  const { setMessage } = useContext(MessageContext)
   const [emojiOpen, setEmojiOpen] = useState(false);
   const [textContend, setTextContend] = useState(String);
 
@@ -19,6 +21,13 @@ function Form() {
     setEmojiOpen(false)
     setTextContend(`${textContend} ${emojiData}`)
   }
+
+  useEffect(() => {
+    setMessage({
+      text: textContend
+    })
+  }, [textContend])
+
   return (
     <div className="flex flex-col gap-4 w-1/2 p-7 border rounded-sm shadow-lg">
       <div>

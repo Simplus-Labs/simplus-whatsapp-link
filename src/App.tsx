@@ -1,6 +1,7 @@
 import MainLayout from './components/layout/MainLayout';
 import Form from './components/Form';
 import Preview from './components/Preview';
+import MessageProvider from './contexts/MessageContext';
 
 function App(): JSX.Element {
   return (
@@ -13,8 +14,10 @@ function App(): JSX.Element {
           <div className="text-neutral-700">Simplus React Boilerplate by Simplus Labs</div>
         </div>
         <div className='flex gap-14'>
-          <Form></Form>
-          <Preview></Preview>
+          <MessageProvider>
+            <Form></Form>
+            <Preview></Preview>
+          </MessageProvider>
         </div>
       </div>
     </MainLayout>
