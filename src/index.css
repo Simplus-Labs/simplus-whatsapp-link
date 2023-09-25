@@ -56,6 +56,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -87,6 +88,7 @@
   --gradient-middle: 202, 9%, 71%;
   --gradient-end: 195, 10%, 63%;
 }
+
 .slate-gradient {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -112,6 +114,7 @@
   --gradient-middle: 208, 34%, 31%;
   --gradient-end: 210, 34%, 21%;
 }
+
 .stone-gradient {
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;
@@ -189,6 +192,7 @@
   --gradient-middle: 202, 9%, 71%;
   --gradient-end: 202, 6%, 61%;
 }
+
 .red-gradient {
   --background: 0 0% 100%;
   --foreground: 0 0% 3.9%;
@@ -214,6 +218,7 @@
   --gradient-middle: 0, 75%, 48%;
   --gradient-end: 0, 73%, 43%;
 }
+
 .rose-gradient {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
@@ -239,30 +244,35 @@
   --gradient-middle: 340, 67%, 55%;
   --gradient-end: 0, 75%, 48%;
 }
+
 .green-gradient {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --primary: 142.1 76.2% 36.3%;
-  --primary-foreground: 355.7 100% 97.3%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 142.1 76.2% 36.3%;
-  --radius: 0.5rem;
-  --gradient-start: 141, 71%, 53%;
-  --gradient-middle: 141, 66%, 45%;
-  --gradient-end: 143, 61%, 37%;
+  @layer base {
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+      --card: 0 0% 100%;
+      --card-foreground: 240 10% 3.9%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 240 10% 3.9%;
+      --primary: 142.1 76.2% 36.3%;
+      --primary-foreground: 355.7 100% 97.3%;
+      --secondary: 240 4.8% 95.9%;
+      --secondary-foreground: 240 5.9% 10%;
+      --muted: 240 4.8% 95.9%;
+      --muted-foreground: 240 3.8% 46.1%;
+      --accent: 240 4.8% 95.9%;
+      --accent-foreground: 240 5.9% 10%;
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 240 5.9% 90%;
+      --input: 240 5.9% 90%;
+      --ring: 142.1 76.2% 36.3%;
+      --radius: 0.5rem;
+      --gradient-start: 141, 71%, 53%;
+      --gradient-middle: 141, 66%, 45%;
+      --gradient-end: 143, 61%, 37%;
+    }
+  }
 }
 
 .blue-gradient {
@@ -290,6 +300,7 @@
   --gradient-middle: 204, 70%, 47%;
   --gradient-end: 204, 63%, 39%;
 }
+
 .yellow-gradient {
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;
@@ -315,6 +326,7 @@
   --gradient-middle: 38, 100%, 50%;
   --gradient-end: 28, 98%, 52%;
 }
+
 .violet-gradient {
   --background: 0 0% 100%;
   --foreground: 224 71.4% 4.1%;
