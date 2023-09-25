@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button"
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import EmojiPicker from 'emoji-picker-react';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/popover";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
+
 import { MessageContext } from "@/contexts/MessageContext";
 
 function Form() {
@@ -53,7 +51,24 @@ function Form() {
         </div>
       </div>
 
-      <Button>Generate</Button>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button>Generate</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. Are you sure you want to permanently
+              delete this file from our servers?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button>Copy URL</Button>
+          </DialogFooter>
+        </DialogContent>
+
+      </Dialog>
     </div>
   )
 }
