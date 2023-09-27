@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction, createContext, useState, ReactNode } from "react";
 
 export type Message = {
-    text: string
+    text: string,
+    phone: string
 }
 
 export interface MessageContextInterface {
@@ -11,7 +12,8 @@ export interface MessageContextInterface {
 
 const defaultState = {
     message: {
-        text: ""
+        text: "",
+        phone: "",
     },
     setMessage: (_message: Message) => { }
 } as MessageContextInterface
@@ -24,7 +26,8 @@ type MessageProvideProps = {
 
 export default function MessageProvider({ children }: MessageProvideProps) {
     const [message, setMessage] = useState<Message>({
-        text: ""
+        text: "",
+        phone: "",
     });
     return (
         <MessageContext.Provider value={{ message, setMessage }}>

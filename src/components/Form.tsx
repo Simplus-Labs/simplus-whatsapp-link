@@ -7,13 +7,17 @@ import 'react-international-phone/style.css';
 import EmojiPicker from 'emoji-picker-react';
 import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/popover";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
-
 import { MessageContext } from "@/contexts/MessageContext";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 function Form() {
   const { setMessage } = useContext(MessageContext)
   const [emojiOpen, setEmojiOpen] = useState(false);
   const [textContend, setTextContend] = useState(String);
+  const [phoneNumber, setPhoneNumber] = useState(String);
+
+  const url = encodeURI(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${textContend}`)
 
   const handleEmojiPicker = (emojiData: string) => {
     setEmojiOpen(false)
@@ -22,9 +26,11 @@ function Form() {
 
   useEffect(() => {
     setMessage({
-      text: textContend
+      text: textContend,
+      phone: phoneNumber,
     })
-  }, [textContend])
+  }, [textContend, phoneNumber])
+
 
   return (
     <div className="flex flex-col gap-4 w-1/2 p-7 border rounded-sm shadow-lg">
@@ -33,6 +39,7 @@ function Form() {
         <PhoneInput
           defaultCountry="us"
           inputClassName="w-full"
+          onChange={(e) => console.log(e)}
         />
       </div>
       <div>
@@ -61,10 +68,15 @@ function Form() {
             <DialogDescription>
               This action cannot be undone. Are you sure you want to permanently
               delete this file from our servers?
+              {/* <div className=" border p-2 mt-2 rounded-sm">
+                {url}
+              </div> */}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button>Copy URL</Button>
+            <CopyToClipboard text={url}>
+              <Button>Copy URL</Button>
+            </CopyToClipboard>
           </DialogFooter>
         </DialogContent>
 
