@@ -31,6 +31,11 @@ function Form() {
     })
   }, [textContend, phoneNumber])
 
+  const handlePhoneNumber = (phone: string) => {
+    const phoneFormated = phone.replace(/\s+/g, '').replace('+', '')
+    setPhoneNumber(phoneFormated)
+  }
+
 
   return (
     <div className="flex flex-col gap-4 w-1/2 p-7 border rounded-sm shadow-lg">
@@ -39,7 +44,7 @@ function Form() {
         <PhoneInput
           defaultCountry="us"
           inputClassName="w-full"
-          onChange={(e) => setPhoneNumber(e)}
+          onChange={(e) => handlePhoneNumber(e)}
         />
       </div>
       <div>
