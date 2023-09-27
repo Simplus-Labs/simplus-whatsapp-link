@@ -39,7 +39,7 @@ function Form() {
         <PhoneInput
           defaultCountry="us"
           inputClassName="w-full"
-          onChange={(e) => console.log(e)}
+          onChange={(e) => setPhoneNumber(e)}
         />
       </div>
       <div>
