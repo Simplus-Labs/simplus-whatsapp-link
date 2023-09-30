@@ -9,11 +9,14 @@ function App(): JSX.Element {
       <div className=" flex flex-col gap-10 w-full">
         <div className="flex flex-col gap-4">
           <div className="text-5xl font-bold bg-gradient-to-b from-gradient-start via-gradient-middle to-gradient-end bg-clip-text text-transparent">
-            WhatsApp Link Tool
+            WhatsApp Link Generator Tool
           </div>
-          <div className="text-neutral-700">Simplus React Boilerplate by Simplus Labs</div>
+          <div className="text-neutral-700">
+            Generate Instant WhatsApp Links with Just a Phone Number: Access quick WhatsApp conversations with our link
+            generation app. Start chatting instantly by entering the phone number!
+          </div>
         </div>
-        <div className='flex gap-14'>
+        <div className="flex gap-14">
           <MessageProvider>
             <Form></Form>
             <Preview></Preview>

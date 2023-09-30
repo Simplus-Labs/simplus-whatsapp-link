@@ -3,7 +3,7 @@
   "author": "Simplus Labs",
   "private": true,
   "version": "1.0.0",
-  "description": "A React boilerplate with consistent design for Simplus Toolbox, responsive layout, quick theme switching, and code quality tools.",
+  "description": "Generate Instant WhatsApp Links with Just a Phone Number: Access quick WhatsApp conversations with our link generation app. Start chatting instantly by entering the phone number!",
   "license": "MIT",
   "engines": {
     "node": "18.x",
