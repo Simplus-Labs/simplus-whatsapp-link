@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 function Preview() {
     const { message } = useContext(MessageContext)
     return (
-        <div className="flex flex-col gap-4 w-1/2 border rounded-sm shadow-lg justify-between">
+        <div className="w-full flex flex-col gap-4 md:w-1/2  border rounded-sm shadow-lg justify-between">
             <div className="w-full flex items-center h-12 bg-slate-200 gap-5 p-1">
                 <Avatar>
                     <AvatarImage src="" />

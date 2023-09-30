@@ -16,7 +16,7 @@ function App(): JSX.Element {
             generation app. Start chatting instantly by entering the phone number!
           </div>
         </div>
-        <div className="flex gap-14">
+        <div className="flex gap-14 max-lg:flex-wrap">
           <MessageProvider>
             <Form></Form>
             <Preview></Preview>

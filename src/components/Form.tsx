@@ -38,7 +38,7 @@ function Form() {
 
 
   return (
-    <div className="flex flex-col gap-4 w-1/2 p-7 border rounded-sm shadow-lg">
+    <div className="w-full flex flex-col gap-4 lg:w-1/2 p-7 border rounded-sm shadow-lg">
       <div>
         <Label>Type your WhatsApp phone number</Label>
         <PhoneInput
