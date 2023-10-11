@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { PhoneNumberUtil } from 'google-libphonenumber';
-import EmojiPicker from 'emoji-picker-react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import EmojiPicker, { EmojiStyle } from 'emoji-picker-react';
+import '../styles/EmojiPicker.css';
 import { MessageContext } from '@/contexts/MessageContext';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Clipboard, ClipboardText, Eye } from '@phosphor-icons/react';
+import { Clipboard, ClipboardText, Eye, Smiley } from '@phosphor-icons/react';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -23,7 +23,7 @@ const isPhoneValid = (phone: string): boolean => {
 
 function Form(): JSX.Element {
   const { setMessage } = useContext(MessageContext);
-  const [emojiOpen, setEmojiOpen] = useState(false);
+  const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [textContend, setTextContend] = useState(String);
   const [phoneNumber, setPhoneNumber] = useState(String);
   const [phonePreview, setPhonePreview] = useState(String);
@@ -32,9 +32,13 @@ function Form(): JSX.Element {
 
   const url = encodeURI(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${textContend}`);
 
+  const toggleEmojiPicker = (): void => {
+    setOpenEmojiPicker(!openEmojiPicker);
+  };
+
   const handleEmojiPicker = (emojiData: string): void => {
-    setEmojiOpen(false);
     setTextContend(`${textContend} ${emojiData}`);
+    setOpenEmojiPicker(false);
   };
 
   useEffect(() => {
@@ -73,25 +77,23 @@ function Form(): JSX.Element {
       </div>
       <div>
         <Label htmlFor="">Custom Message</Label>
-        <div>
-          <Popover open={emojiOpen}>
-            <PopoverTrigger
-              onClick={() => {
-                setEmojiOpen(!emojiOpen);
+        <div className="relative">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={toggleEmojiPicker}
+            className="absolute bottom-2 right-2 hidden lg:inline-flex"
+          >
+            <Smiley size={24} />
+          </Button>
+          {openEmojiPicker && (
+            <EmojiPicker
+              emojiStyle={EmojiStyle.TWITTER}
+              onEmojiClick={(data) => {
+                handleEmojiPicker(data.emoji);
               }}
-            >
-              <div className="w-10 h-10 p-2 border flex items-center justify-center rounded-full mb-3 cursor-pointer hover:bg-slate-200">
-                🙂
-              </div>
-            </PopoverTrigger>
-            <PopoverContent hideWhenDetached={true}>
-              <EmojiPicker
-                onEmojiClick={(data) => {
-                  handleEmojiPicker(data.emoji);
-                }}
-              />
-            </PopoverContent>
-          </Popover>
+            />
+          )}
           <Textarea
             className=" h-52"
             onChange={(e) => {
