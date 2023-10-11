@@ -32,6 +32,9 @@ dependencies:
   emoji-picker-react:
     specifier: ^4.5.2
     version: 4.5.2(react@18.2.0)
+  google-libphonenumber:
+    specifier: ^3.2.33
+    version: 3.2.33
   lucide-react:
     specifier: ^0.277.0
     version: 0.277.0(react@18.2.0)
@@ -61,12 +64,18 @@ devDependencies:
   '@commitlint/config-conventional':
     specifier: ^17.7.0
     version: 17.7.0
+  '@types/google-libphonenumber':
+    specifier: ^7.4.27
+    version: 7.4.27
   '@types/node':
     specifier: ^20.6.1
     version: 20.6.1
   '@types/react':
     specifier: ^18.2.15
     version: 18.2.15
+  '@types/react-copy-to-clipboard':
+    specifier: ^5.0.5
+    version: 5.0.5
   '@types/react-dom':
     specifier: ^18.2.7
     version: 18.2.7
@@ -1362,6 +1371,10 @@ packages:
   /@tsconfig/node16@1.0.4:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
 
+  /@types/google-libphonenumber@7.4.27:
+    resolution: {integrity: sha512-A9I7sLv941PQhnQgN+BtydlZTOZERSEN3C7vZS3kE+RQoDU6Z+YKYRWXU+nEDGjOCXeUtSp7z+sZqXNxIyvrUw==}
+    dev: true
+
   /@types/json-schema@7.0.12:
     resolution: {integrity: sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==}
     dev: true
@@ -1387,6 +1400,12 @@ packages:
 
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+
+  /@types/react-copy-to-clipboard@5.0.5:
+    resolution: {integrity: sha512-en3JGqPA4RX4aUlo6q6uUbnqLp31Dhm2E/thiMvFTIvU+dUDG249jBG2MJ0rPMXE/MbKVrpmi/1r1G4QLhIHKQ==}
+    dependencies:
+      '@types/react': 18.2.15
+    dev: true
 
   /@types/react-dom@18.2.7:
     resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
@@ -3083,6 +3102,11 @@ packages:
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
+
+  /google-libphonenumber@3.2.33:
+    resolution: {integrity: sha512-1QKCvAlfq8zY1mviORI9lDzM3I/hwm9+h0CwYBTLq59DBbSHMd5zBOLqHZFiBLicRpwIz46Nynvbywj1XApKvA==}
+    engines: {node: '>=0.10'}
+    dev: false
 
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
