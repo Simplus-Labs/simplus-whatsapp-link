@@ -122,6 +122,7 @@ function Form(): JSX.Element {
               </div>
             )}
             <Textarea
+              placeholder="Add a custom message that users will send to you"
               className=" h-52"
               onChange={(e) => {
                 setTextContend(e.target.value);
