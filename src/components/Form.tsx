@@ -1,5 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
-import { Label } from '@/components/ui/label';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { PhoneInput } from 'react-international-phone';
@@ -24,6 +23,8 @@ const isPhoneValid = (phone: string): boolean => {
 function Form(): JSX.Element {
   const { setMessage } = useContext(MessageContext);
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
+  const emojiButtonRef = useRef<HTMLButtonElement>(null);
+  const emojiPickerRef = useRef<null | HTMLDivElement>(null);
   const [textContend, setTextContend] = useState(String);
   const [phoneNumber, setPhoneNumber] = useState(String);
   const [phonePreview, setPhonePreview] = useState(String);
@@ -39,7 +40,26 @@ function Form(): JSX.Element {
   const handleEmojiPicker = (emojiData: string): void => {
     setTextContend(`${textContend} ${emojiData}`);
     setOpenEmojiPicker(false);
+    console.log('open');
   };
+
+  const handlePageClick = (e: MouseEvent): void => {
+    if (
+      emojiPickerRef.current !== null &&
+      !emojiPickerRef.current.contains(e.target as Node) &&
+      emojiButtonRef.current !== null &&
+      !emojiButtonRef.current?.contains(e.target as Node)
+    ) {
+      setOpenEmojiPicker(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('click', handlePageClick);
+
+    return () => {
+      document.removeEventListener('click', handlePageClick);
+    };
+  }, [openEmojiPicker]);
 
   useEffect(() => {
     setMessage({
@@ -63,65 +83,76 @@ function Form(): JSX.Element {
   };
 
   return (
-    <div className="w-full flex flex-col gap-4 lg:w-1/2 p-7 border rounded-sm shadow-lg">
-      <div>
-        <Label>Type your WhatsApp phone number</Label>
-        <PhoneInput
-          defaultCountry="us"
-          inputClassName={`w-full ${isValid ? '' : 'border-red-500'}`}
-          onChange={(e) => {
-            handlePhoneNumber(e);
-          }}
-        />
-        {!isValid && <div style={{ color: 'red' }}>Invalid phone number</div>}
-      </div>
-      <div>
-        <Label htmlFor="">Custom Message</Label>
-        <div className="relative">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={toggleEmojiPicker}
-            className="absolute bottom-2 right-2 hidden lg:inline-flex"
-          >
-            <Smiley size={24} />
-          </Button>
-          {openEmojiPicker && (
-            <EmojiPicker
-              emojiStyle={EmojiStyle.TWITTER}
-              onEmojiClick={(data) => {
-                handleEmojiPicker(data.emoji);
+    <div className="w-full flex flex-col gap-8 lg:w-1/2 p-7 border rounded-md shadow-lg">
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1">
+          <div className="font-medium">Type your WhatsApp phone number</div>
+          <div>
+            <PhoneInput
+              defaultCountry="us"
+              inputClassName={`w-full ${isValid ? '' : 'border-red-500'}`}
+              onChange={(e) => {
+                handlePhoneNumber(e);
               }}
             />
-          )}
-          <Textarea
-            className=" h-52"
-            onChange={(e) => {
-              setTextContend(e.target.value);
-            }}
-            value={textContend}
-          ></Textarea>
+            {!isValid && <div className="text-red-500 text-sm">Invalid phone number</div>}
+          </div>
+        </div>
+        <div className="flex flex-col gap-1">
+          <div className="font-medium">Custom Message</div>
+          <div className="relative">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={toggleEmojiPicker}
+              className="absolute bottom-2 right-2 hidden lg:inline-flex"
+              ref={emojiButtonRef}
+            >
+              <Smiley size={24} />
+            </Button>
+            {openEmojiPicker && (
+              <div ref={emojiPickerRef}>
+                <EmojiPicker
+                  previewConfig={{ showPreview: false }}
+                  emojiStyle={EmojiStyle.TWITTER}
+                  onEmojiClick={(data) => {
+                    handleEmojiPicker(data.emoji);
+                  }}
+                />
+              </div>
+            )}
+            <Textarea
+              className=" h-52"
+              onChange={(e) => {
+                setTextContend(e.target.value);
+              }}
+              value={textContend}
+            ></Textarea>
+          </div>
         </div>
       </div>
-      <Button variant="secondary" onClick={() => window.open(url)} disabled={!isValid}>
-        <Eye className="mr-2" size={20} />
-        Preview
-      </Button>
-      <CopyToClipboard text={url} onCopy={handleCopy}>
-        <Button disabled={!isValid}>
-          {urlCopied ? (
-            <>
-              <ClipboardText className="mr-2" size={20} />
-              Copied!
-            </>
-          ) : (
-            <>
-              <Clipboard className="mr-2" size={20} />
-              Copy to Clipboard
-            </>
-          )}
+
+      <div className="flex flex-col gap-2">
+        <Button variant="secondary" onClick={() => window.open(url)} disabled={!isValid}>
+          <Eye className="mr-2" size={20} />
+          Preview
         </Button>
-      </CopyToClipboard>
+        <CopyToClipboard text={url} onCopy={handleCopy}>
+          <Button disabled={!isValid}>
+            {urlCopied ? (
+              <>
+                <ClipboardText className="mr-2" size={20} />
+                Copied!
+              </>
+            ) : (
+              <>
+                <Clipboard className="mr-2" size={20} />
+                Copy to Clipboard
+              </>
+            )}
+          </Button>
+        </CopyToClipboard>
+      </div>
     </div>
   );
 }
