@@ -11,14 +11,14 @@ function Preview(): JSX.Element {
       <div className="w-full h-full rounded-md flex flex-col justify-between">
         <div className="w-full rounded-t-md flex items-center h-14 bg-[#F0F2F5] gap-4 py-2 px-3">
           <Avatar>
-            <AvatarImage src="/src/assets/user.svg" />
+            <AvatarImage src="/user.svg" />
             <AvatarFallback>SL</AvatarFallback>
           </Avatar>
           <div>{message.phone}</div>
         </div>
         <div
           className="bg-[#EFEAE2] w-full h-[336px] flex flex-col items-end overflow-y-auto scrollbar"
-          style={{ backgroundImage: 'url(/src/assets/bg-whatsapp.png)' }}
+          style={{ backgroundImage: 'url(/bg-whatsapp.png)' }}
         >
           <div className=" bg-[#D9FDD3] w-fit min-w-24 min-h-8 h-fit my-2 mr-2 ml-8 rounded-sm px-2 py-1">
             {message.text}
