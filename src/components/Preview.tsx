@@ -2,7 +2,7 @@ import { MessageContext } from '@/contexts/MessageContext';
 import { useContext } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PaperPlaneRight } from '@phosphor-icons/react';
-import '../styles/Preview.css';
+import '../styles/Scrollbar.css';
 
 function Preview(): JSX.Element {
   const { message } = useContext(MessageContext);
@@ -17,7 +17,7 @@ function Preview(): JSX.Element {
           <div>{message.phone}</div>
         </div>
         <div
-          className="bg-[#EFEAE2] w-full h-[336px] flex flex-col items-end overflow-y-auto scrollbar"
+          className="bg-[#EFEAE2] w-full h-[336px] flex flex-col items-end overflow-y-auto scrollbar-whatsapp"
           style={{ backgroundImage: 'url(/bg-whatsapp.png)' }}
         >
           <div className=" bg-[#D9FDD3] w-fit min-w-24 min-h-8 h-fit my-2 mr-2 ml-8 rounded-sm px-2 py-1">
