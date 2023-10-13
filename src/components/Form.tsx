@@ -18,6 +18,8 @@ import { MessageContext } from '@/contexts/MessageContext';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Clipboard, ClipboardText, Eye, Smiley, QrCode, DownloadSimple } from '@phosphor-icons/react';
 import { QRCodeCanvas } from 'qrcode.react';
+import html2canvas from 'html2canvas';
+import '../styles/Scrollbar.css';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -67,17 +69,34 @@ function Form(): JSX.Element {
     }, 2000);
   };
 
+  const getCanvas = async (): Promise<HTMLCanvasElement | undefined> => {
+    const qr = document.getElementById('qrCard');
+    if (qr === null) return;
+
+    return await html2canvas(qr, {
+      onclone: (snapshot) => {
+        const qrElement = snapshot.getElementById('qrCard');
+        if (qrElement === null) {
+          throw new Error('Element not found in the snapshot');
+        }
+      },
+    });
+  };
+
   const handleDownloadQRCode = (): void => {
-    if (qrCodeRef.current !== null) {
-      const canvas = qrCodeRef.current.querySelector('canvas');
-      if (canvas !== null) {
-        const pngUrl = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-        const downloadLink = document.createElement('a');
-        downloadLink.href = pngUrl;
-        downloadLink.download = 'Whatsapp-Link-QRCode.png';
-        downloadLink.click();
-      }
-    }
+    getCanvas()
+      .then((canvas) => {
+        if (qrCodeRef.current !== null && canvas !== undefined) {
+          const pngUrl = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+          const downloadLink = document.createElement('a');
+          downloadLink.href = pngUrl;
+          downloadLink.download = 'Whatsapp-Link-QRCode.png';
+          downloadLink.click();
+        }
+      })
+      .catch((error) => {
+        console.error('Error in handleDownloadQRCode:', error);
+      });
   };
 
   return (
@@ -112,6 +131,7 @@ function Form(): JSX.Element {
               <PopoverContent hideWhenDetached={true} className="w-auto p-0 border-none">
                 <EmojiPicker
                   previewConfig={{ showPreview: false }}
+                  lazyLoadEmojis={true}
                   emojiStyle={EmojiStyle.TWITTER}
                   onEmojiClick={(data) => {
                     handleEmojiPicker(data.emoji);
@@ -122,7 +142,7 @@ function Form(): JSX.Element {
           </div>
           <Textarea
             placeholder="Add a custom message that users will send to you"
-            className=" h-52"
+            className="h-52 scrollbar-y"
             onChange={(e) => {
               setTextContend(e.target.value);
             }}
@@ -151,30 +171,58 @@ function Form(): JSX.Element {
                 by your customers.
               </DialogDescription>
             </DialogHeader>
-            <div className="flex justify-center w-fit border-2 rounded-md p-4" ref={qrCodeRef}>
-              <QRCodeCanvas value={url} size={256} />
-            </div>
-            <div className="flex flex-col lg:flex-row gap-2 w-full justify-center">
-              <CopyToClipboard text={url} onCopy={handleCopy}>
-                <Button>
+            <div className="border w-full rounded-md p-2 flex justify-between items-center gap-2">
+              <div className="overflow-x-auto scrollbar-x p-2 text-sm">{url}</div>
+              <div>
+                <CopyToClipboard text={url} onCopy={handleCopy}>
                   {urlCopied ? (
-                    <>
-                      <ClipboardText className="mr-2" size={20} />
-                      Copied!
-                    </>
+                    <Button variant="ghost" size="icon">
+                      <ClipboardText size={20} />
+                    </Button>
                   ) : (
-                    <>
-                      <Clipboard className="mr-2" size={20} />
-                      Copy to Clipboard
-                    </>
+                    <Button variant="ghost" size="icon">
+                      <Clipboard size={20} />
+                    </Button>
                   )}
-                </Button>
-              </CopyToClipboard>
-              <Button variant="secondary" onClick={handleDownloadQRCode}>
-                <DownloadSimple className="mr-2" size={20} />
-                Download QR
-              </Button>
+                </CopyToClipboard>
+              </div>
             </div>
+            <div
+              className="grid w-fit justify-center rounded-md border-2 p-4 place-items-center"
+              ref={qrCodeRef}
+              id="qrCard"
+            >
+              <QRCodeCanvas
+                value={url}
+                size={256}
+                level="H"
+                fgColor="#123033"
+                imageSettings={{
+                  src: '',
+                  x: undefined,
+                  y: undefined,
+                  height: 56,
+                  width: 56,
+                  excavate: true,
+                }}
+                className="col-start-1 row-start-1"
+              />
+              <img
+                src="/whatsapp-logo.svg"
+                alt="whatsapp-logo"
+                width={56}
+                height={56}
+                className="col-start-1 row-start-1"
+              />
+            </div>
+            <Button
+              onClick={() => {
+                handleDownloadQRCode();
+              }}
+            >
+              <DownloadSimple className="mr-2" size={20} />
+              Download QR
+            </Button>
           </DialogContent>
         </Dialog>
       </div>
