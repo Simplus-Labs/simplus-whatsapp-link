@@ -1,14 +1,23 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import EmojiPicker, { EmojiStyle } from 'emoji-picker-react';
 import { MessageContext } from '@/contexts/MessageContext';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Clipboard, ClipboardText, Eye, Smiley } from '@phosphor-icons/react';
+import { Clipboard, ClipboardText, Eye, Smiley, QrCode, DownloadSimple } from '@phosphor-icons/react';
+import { QRCodeCanvas } from 'qrcode.react';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -28,6 +37,7 @@ function Form(): JSX.Element {
   const [phonePreview, setPhonePreview] = useState(String);
   const isValid = isPhoneValid(`+${phoneNumber}`);
   const [urlCopied, setUrlCopied] = useState(false);
+  const qrCodeRef = useRef<HTMLDivElement>(null);
 
   const url = encodeURI(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${textContend}`);
 
@@ -55,6 +65,19 @@ function Form(): JSX.Element {
     setTimeout(() => {
       setUrlCopied(false);
     }, 2000);
+  };
+
+  const handleDownloadQRCode = (): void => {
+    if (qrCodeRef.current !== null) {
+      const canvas = qrCodeRef.current.querySelector('canvas');
+      if (canvas !== null) {
+        const pngUrl = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+        const downloadLink = document.createElement('a');
+        downloadLink.href = pngUrl;
+        downloadLink.download = 'Whatsapp-Link-QRCode.png';
+        downloadLink.click();
+      }
+    }
   };
 
   return (
@@ -113,21 +136,47 @@ function Form(): JSX.Element {
           <Eye className="mr-2" size={20} />
           Preview
         </Button>
-        <CopyToClipboard text={url} onCopy={handleCopy}>
-          <Button disabled={!isValid}>
-            {urlCopied ? (
-              <>
-                <ClipboardText className="mr-2" size={20} />
-                Copied!
-              </>
-            ) : (
-              <>
-                <Clipboard className="mr-2" size={20} />
-                Copy to Clipboard
-              </>
-            )}
-          </Button>
-        </CopyToClipboard>
+        <Dialog>
+          <DialogTrigger>
+            <Button className="w-full" disabled={!isValid}>
+              <QrCode className="mr-2" size={20} />
+              Generate QR
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="flex flex-col justify-center items-center">
+            <DialogHeader>
+              <DialogTitle>This is your WhatsApp link</DialogTitle>
+              <DialogDescription>
+                Copy and share it on your social media, website, emails or anywhere you want to be contacted instantly
+                by your customers.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex justify-center w-fit border-2 rounded-md p-4" ref={qrCodeRef}>
+              <QRCodeCanvas value={url} size={256} />
+            </div>
+            <div className="flex flex-col lg:flex-row gap-2 w-full justify-center">
+              <CopyToClipboard text={url} onCopy={handleCopy}>
+                <Button>
+                  {urlCopied ? (
+                    <>
+                      <ClipboardText className="mr-2" size={20} />
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Clipboard className="mr-2" size={20} />
+                      Copy to Clipboard
+                    </>
+                  )}
+                </Button>
+              </CopyToClipboard>
+              <Button variant="secondary" onClick={handleDownloadQRCode}>
+                <DownloadSimple className="mr-2" size={20} />
+                Download QR
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
