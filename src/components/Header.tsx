@@ -17,12 +17,12 @@ export default function Header(): JSX.Element {
 
   return (
     <div className="sticky top-0 z-50">
-      <div className="flex flex-col items-center justify-between px-4 py-3 lg:px-40 lg:flex-row bg-background/80 backdrop-blur-sm">
+      <div className="flex flex-col items-center justify-between px-4 py-3 lg:px-8 xl:px-40 lg:flex-row bg-background/80 backdrop-blur-sm">
         <div className="flex items-center justify-between w-full lg:w-auto">
           <a href="/">
             <Logo className="h-14" />
           </a>
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Button
               variant="outline"
               size="icon"

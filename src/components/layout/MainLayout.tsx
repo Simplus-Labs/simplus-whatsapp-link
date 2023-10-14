@@ -9,7 +9,7 @@ export default function MainLayout({ children }: MainLayoutProps): JSX.Element {
   return (
     <>
       <Header />
-      <div className="flex justify-between px-4 py-14 lg:px-40 gap-20">
+      <div className="flex justify-between px-4 py-14 lg:px-8 xl:px-40 gap-20">
         {children}
         <div className="hidden lg:block">
           <OtherTools />
