@@ -11,7 +11,7 @@ function App(): JSX.Element {
           <div className="text-5xl font-bold bg-gradient-to-b from-gradient-start via-gradient-middle to-gradient-end bg-clip-text text-transparent">
             WhatsApp Link Generator Tool
           </div>
-          <div className="text-neutral-700">
+          <div className="text-neutral-700 max-w-3xl">
             Generate Instant WhatsApp Links with Just a Phone Number: Access quick WhatsApp conversations with our link
             generation app. Start chatting instantly by entering the phone number!
           </div>
