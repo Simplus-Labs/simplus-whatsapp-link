@@ -17,10 +17,10 @@ function Preview(): JSX.Element {
           <div>{message.phone}</div>
         </div>
         <div
-          className="bg-[#EFEAE2] w-full h-[336px] flex flex-col items-end overflow-y-auto scrollbar-whatsapp"
+          className="bg-[#EFEAE2] w-[270px] h-[336px] flex flex-col items-end overflow-y-auto overflow-x-hidden scrollbar-whatsapp"
           style={{ backgroundImage: 'url(/bg-whatsapp.png)' }}
         >
-          <div className=" bg-[#D9FDD3] w-fit min-w-24 min-h-8 h-fit my-2 mr-2 ml-8 rounded-sm px-2 py-1">
+          <div className=" bg-[#D9FDD3] w-fit min-w-24 min-h-8 h-fit my-2 mr-2 ml-8 rounded-sm px-2 py-1 max-w-[230px] break-words">
             {message.text}
           </div>
         </div>
