@@ -115,7 +115,7 @@ function Form(): JSX.Element {
         </div>
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center">
-            <div className="font-medium">Custom Messaged</div>
+            <div className="font-medium">Custom Message</div>
             <Popover open={emojiOpen}>
               <PopoverTrigger
                 onClick={() => {
@@ -140,12 +140,17 @@ function Form(): JSX.Element {
           </div>
           <Textarea
             placeholder="Add a custom message that users will send to you"
-            className="h-52 scrollbar-y"
+            className="h-52 scrollbar-y resize-none"
+            maxLength={500}
             onChange={(e) => {
               setTextContend(e.target.value);
             }}
             value={textContend}
           ></Textarea>
+          <div className="flex justify-between text-sm">
+            <div>Characters left</div>
+            <div>{textContend.length}/500</div>
+          </div>
         </div>
       </div>
 
