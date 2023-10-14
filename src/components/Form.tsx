@@ -21,27 +21,27 @@ import { QRCodeCanvas } from 'qrcode.react';
 import html2canvas from 'html2canvas';
 import '../styles/Scrollbar.css';
 
-const phoneUtil = PhoneNumberUtil.getInstance();
-
-const isPhoneValid = (phone: string): boolean => {
-  try {
-    return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
-  } catch (error) {
-    return false;
-  }
-};
-
 function Form(): JSX.Element {
   const { setMessage } = useContext(MessageContext);
   const [emojiOpen, setEmojiOpen] = useState(false);
   const [textContend, setTextContend] = useState(String);
+  const phoneUtil = PhoneNumberUtil.getInstance();
   const [phoneNumber, setPhoneNumber] = useState(String);
   const [phonePreview, setPhonePreview] = useState(String);
-  const isValid = isPhoneValid(`+${phoneNumber}`);
+  const [isValid, setIsValid] = useState(true);
   const [urlCopied, setUrlCopied] = useState(false);
   const qrCodeRef = useRef<HTMLDivElement>(null);
 
   const url = encodeURI(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${textContend}`);
+
+  const isPhoneValid = (phone: string): boolean => {
+    try {
+      setIsValid(phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone)));
+      return isValid;
+    } catch (error) {
+      return false;
+    }
+  };
 
   const handleEmojiPicker = (emojiData: string): void => {
     setEmojiOpen(false);
@@ -108,6 +108,11 @@ function Form(): JSX.Element {
               inputClassName={`w-full ${isValid ? '' : 'border-red-500'}`}
               onChange={(e) => {
                 handlePhoneNumber(e);
+              }}
+              inputProps={{
+                onBlur: () => {
+                  isPhoneValid(`+${phoneNumber}`);
+                },
               }}
             />
             {!isValid && <div className="text-red-500 text-sm">Invalid phone number</div>}
