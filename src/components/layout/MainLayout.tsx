@@ -7,7 +7,7 @@ interface MainLayoutProps {
 }
 export default function MainLayout({ children }: MainLayoutProps): JSX.Element {
   return (
-    <>
+    <div className="max-w-screen-2xl mx-auto">
       <Header />
       <div className="flex justify-between px-4 py-14 lg:px-8 xl:px-40 gap-20">
         {children}
@@ -16,6 +16,6 @@ export default function MainLayout({ children }: MainLayoutProps): JSX.Element {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
