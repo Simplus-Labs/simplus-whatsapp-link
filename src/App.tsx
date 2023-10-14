@@ -2,7 +2,6 @@ import MainLayout from './components/layout/MainLayout';
 import Form from './components/Form';
 import Preview from './components/Preview';
 import MessageProvider from './contexts/MessageContext';
-import { CaretRight, CaretDown } from '@phosphor-icons/react';
 
 function App(): JSX.Element {
   return (
@@ -17,13 +16,9 @@ function App(): JSX.Element {
             generation app. Start chatting instantly by entering the phone number!
           </div>
         </div>
-        <div className="flex gap-4 items-center justify-center max-lg:flex-wrap">
+        <div className="flex gap-12 items-center justify-between flex-col md:flex-row w-fit">
           <MessageProvider>
             <Form />
-            <div className="text-sm text-center w-24 justify-center flex flex-col items-center gap-2">
-              This is how your users will see it <CaretDown size={24} className="lg:hidden" />
-              <CaretRight size={24} className="hidden lg:inline-block" />
-            </div>
             <Preview />
           </MessageProvider>
         </div>

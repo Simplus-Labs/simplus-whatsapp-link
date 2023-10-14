@@ -7,7 +7,7 @@ import '../styles/Scrollbar.css';
 function Preview(): JSX.Element {
   const { message } = useContext(MessageContext);
   return (
-    <div className="w-full flex flex-col gap-4 md:w-1/3 border rounded-md shadow-lg bg-white px-2 py-8">
+    <div className="w-[288px] flex flex-col gap-4 border rounded-md shadow-lg bg-white px-2 py-8">
       <div className="w-full h-full rounded-md flex flex-col justify-between">
         <div className="w-full rounded-t-md flex items-center h-14 bg-[#F0F2F5] gap-4 py-2 px-3">
           <Avatar>

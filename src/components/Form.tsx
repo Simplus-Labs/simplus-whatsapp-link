@@ -98,12 +98,13 @@ function Form(): JSX.Element {
   };
 
   return (
-    <div className="w-full flex flex-col gap-8 lg:w-1/2 p-7 border rounded-md shadow-lg">
+    <div className="w-full flex flex-col gap-8 md:w-96 p-7 border rounded-md shadow-lg">
       <div className="flex flex-col gap-2">
         <div className="flex flex-col gap-1">
           <div className="font-medium">Type your WhatsApp phone number</div>
           <div>
             <PhoneInput
+              countrySelectorStyleProps={{ buttonClassName: 'px-2' }}
               defaultCountry="us"
               inputClassName={`w-full ${isValid ? '' : 'border-red-500'}`}
               onChange={(e) => {
