@@ -70,10 +70,8 @@ function Form(): JSX.Element {
   };
 
   const getCanvas = async (): Promise<HTMLCanvasElement | undefined> => {
-    const qr = document.getElementById('qrCard');
-    if (qr === null) return;
-
-    return await html2canvas(qr, {
+    if (qrCodeRef.current === null) return;
+    return await html2canvas(qrCodeRef.current, {
       onclone: (snapshot) => {
         const qrElement = snapshot.getElementById('qrCard');
         if (qrElement === null) {
