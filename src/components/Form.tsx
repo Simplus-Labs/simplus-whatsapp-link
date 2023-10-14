@@ -16,7 +16,7 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 import EmojiPicker, { EmojiStyle } from 'emoji-picker-react';
 import { MessageContext } from '@/contexts/MessageContext';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Clipboard, ClipboardText, Eye, Smiley, QrCode, DownloadSimple } from '@phosphor-icons/react';
+import { Clipboard, ClipboardText, Eye, Smiley, Link, DownloadSimple } from '@phosphor-icons/react';
 import { QRCodeCanvas } from 'qrcode.react';
 import html2canvas from 'html2canvas';
 import '../styles/Scrollbar.css';
@@ -168,8 +168,8 @@ function Form(): JSX.Element {
         <Dialog>
           <DialogTrigger>
             <Button className="w-full" disabled={!isValid}>
-              <QrCode className="mr-2" size={20} />
-              Generate QR
+              <Link className="mr-2" size={20} />
+              Generate link
             </Button>
           </DialogTrigger>
           <DialogContent className="flex flex-col justify-center items-center">
