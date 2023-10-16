@@ -1,4 +1,7 @@
 import MainLayout from './components/layout/MainLayout';
+import Form from './components/Form';
+import Preview from './components/Preview';
+import MessageProvider from './contexts/MessageContext';
 
 function App(): JSX.Element {
   return (
@@ -6,12 +9,18 @@ function App(): JSX.Element {
       <div className=" flex flex-col gap-10 w-full">
         <div className="flex flex-col gap-4">
           <div className="text-5xl font-bold bg-gradient-to-b from-gradient-start via-gradient-middle to-gradient-end bg-clip-text text-transparent">
-            Simplus React Boilerplate
+            WhatsApp Link Generator Tool
           </div>
-          <div className="text-neutral-700">Simplus React Boilerplate by Simplus Labs</div>
+          <div className="text-neutral-700 max-w-3xl">
+            Generate Instant WhatsApp Links with Just a Phone Number: Access quick WhatsApp conversations with our link
+            generation app. Start chatting instantly by entering the phone number!
+          </div>
         </div>
-        <div className="border-dashed	border-2 rounded-md h-96 text-4xl	font-bold items-center flex justify-center text-neutral-400">
-          Tool Here
+        <div className="flex gap-12 items-center justify-between flex-col md:flex-row w-fit">
+          <MessageProvider>
+            <Form />
+            <Preview />
+          </MessageProvider>
         </div>
       </div>
     </MainLayout>

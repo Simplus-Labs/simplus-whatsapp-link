@@ -17,12 +17,12 @@ export default function Header(): JSX.Element {
 
   return (
     <div className="sticky top-0 z-50">
-      <div className="flex flex-col items-center justify-between px-4 py-3 lg:px-40 lg:flex-row bg-background/80 backdrop-blur-sm">
-        <div className="flex items-center justify-between w-full lg:w-auto">
+      <div className="flex flex-col items-center justify-between px-4 py-3 lg:px-16 xl:px-40 xl:flex-row bg-background/80 backdrop-blur-sm">
+        <div className="flex items-center justify-between w-full xl:w-auto">
           <a href="/">
             <Logo className="h-14" />
           </a>
-          <div className="md:hidden">
+          <div className="xl:hidden">
             <Button
               variant="outline"
               size="icon"
@@ -34,7 +34,7 @@ export default function Header(): JSX.Element {
             </Button>
           </div>
         </div>
-        <nav className="font-medium lg:flex items-center gap-4 hidden">
+        <nav className="font-medium xl:flex items-center gap-4 hidden">
           <ul className="flex gap-4">
             <li>
               <a
@@ -66,7 +66,7 @@ export default function Header(): JSX.Element {
         </nav>
       </div>
       {isMenuOpen && (
-        <div className="fixed left-0 top-20 z-50 flex h-full w-full flex-col gap-6 px-4 py-2 lg:hidden bg-background/80 backdrop-blur-sm">
+        <div className="fixed left-0 top-20 z-50 flex h-full w-full flex-col gap-6 lg:px-16 px-4 py-2 xl:hidden bg-background/80 backdrop-blur-sm">
           <nav className="font-medium gap-4 flex flex-col">
             <ul className="flex flex-col">
               <li>

@@ -1,0 +1,31 @@
+.scrollbar-whatsapp {
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(195, 193, 198);
+  }
+}
+
+.scrollbar-x {
+  &::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(228, 228, 231);
+    border-radius: 0.5rem;
+  }
+}
+
+.scrollbar-y {
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(228, 228, 231);
+    border-radius: 0.5rem;
+  }
+}

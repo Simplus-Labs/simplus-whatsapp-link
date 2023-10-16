@@ -7,15 +7,15 @@ interface MainLayoutProps {
 }
 export default function MainLayout({ children }: MainLayoutProps): JSX.Element {
   return (
-    <>
+    <div className="max-w-screen-2xl mx-auto">
       <Header />
-      <div className="flex justify-between px-4 py-14 lg:px-40 gap-20">
+      <div className="flex justify-between px-4 py-14 lg:px-16 xl:px-40 gap-20">
         {children}
-        <div className="hidden lg:block">
+        <div className="hidden xl:block">
           <OtherTools />
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

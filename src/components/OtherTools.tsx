@@ -35,7 +35,7 @@ export default function OtherTools(): JSX.Element {
   };
 
   return (
-    <div className="w-full lg:w-72 py-2 flex flex-col gap-6">
+    <div className="w-full xl:w-72 py-2 flex flex-col gap-6">
       <div className="flex justify-between items-center">
         <div className="font-bold">Other tools</div>
         <Button variant="outline" className="border-primary font-medium">
